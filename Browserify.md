@@ -1,4 +1,4 @@
-# Browserify
+# Browserify (part 1 - introduction)
 
 ### Intro
 
