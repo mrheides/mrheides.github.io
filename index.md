@@ -1,2 +1,2 @@
-1. [Knockout components](./Knockout%20Components.md)
+1. [Knockout components](./KnockoutComponents.md)
 2. [Browserify (part 1)](./Browserify.md)
