@@ -1,12 +1,15 @@
 #Browserify
 
 ###Intro
+
 This is about the tool that helped us to organize our js knockout view models (and ultimately all js files) into require-able js modules bundled together as one file.
 
 ###Why
+
 Looking at the number of js files, number of code lines and desire to have reusability and dependencies managed easily (somewhat...)
 
 ###How
+
 First, we need to specify the js module in separate js file. Lets say we would like to tweak our CommentsComponents.
 
 The simplest Comment view model:
