@@ -13,7 +13,9 @@ We've used the Knockout as the forontend framework of choice because of its' "un
 It starts with the bindings. Lets say that we have a really basic list of the comments to show.
 
 Some html:
-```<div class="comments" data-bind="foreach: comments">
+
+```
+<div class="comments" data-bind="foreach: comments">
 	<div class="single-comment">
 		<img data-bind="attr: {src: avatarPath}" />
 		<span data-bind="text: commentText"></span>
@@ -32,14 +34,17 @@ Some html:
 				 avatarPath: "path/to/avatar3.png" }]
 			});
 	}();
-</script>```
+</script>
+```
 
 As you can see, comments has list of similar objects which are of the same "type". Lets create the "class" for them (ES5).
 
-```var CommentViewModel = function(text, avatarPath) {
+```
+var CommentViewModel = function(text, avatarPath) {
 	this.commentText = text;
 	this.avatarPath = avatarPath;
-}```
+}
+```
 
 And for the comments container
 
@@ -56,19 +61,23 @@ var CommentsViewModel = function(loadingParameter) {
 			new CommentViewModel("third comment", "path/to/avatar3.png")
 		];
 	}
-}```
+}
+```
 
 So now it can be used as
 
-```var loadingParameter = "parameter1";
+```
+var loadingParameter = "parameter1";
 var comments = new CommentsViewModel(loadingParameter);
-ko.applyBindings(comments);```
+ko.applyBindings(comments);
+```
 
 Now lets say that we need to display that list in many different places within the system. This is what the templates should address nicely.
 
 So let's move the comments and comments list into templates
 
-```<script type="text/html" id="comment-template">
+```
+<script type="text/html" id="comment-template">
    	<div class="single-comment">
 		<img data-bind="attr: {src: avatarPath}" />
 		<span data-bind="text: commentText"></span>
@@ -77,21 +86,30 @@ So let's move the comments and comments list into templates
 
 <script type="text/html" id="comments-template">
     <div class="comments" data-bind="template: {name: 'comment-template', foreach: comments} "></div>
-</script>```
+</script>
+```
 
 Which can be use now as:
-```<div data-bind="template: {name: 'comments-template'} "></div>```
+```
+<div data-bind="template: {name: 'comments-template'} "></div>
+```
 
 Having the pairs of View Models and Templates gives us the ability to pack them into Components. Well... of course we could go to the components right away with the inline html template and view model but that's look for me like a more real life process. 
 
 Creating one looks like this:
 
-```ko.components.register('comments-list', { viewModel: CommentsViewModel, template: { element: 'comments-template' } });```
+```
+ko.components.register('comments-list', { viewModel: CommentsViewModel, template: { element: 'comments-template' } });
+```
 
 After registration it may be used like this
 
-```<div data-bind="component: 'comments-list'"></div>```
+```
+<div data-bind="component: 'comments-list'"></div>
+```
 
 Or even like this
 
-```<comments-list params="loadingParameter: 'test1'"></comments-list>```
+```
+<comments-list params="loadingParameter: 'test1'"></comments-list>
+```
