@@ -1,12 +1,15 @@
 #Knockout Components
 
-###1. Intro
+###Intro
+
 In this chapter I'll try to show the concept of Knockout Components. The thing that brings reusable modules responsible for its' own state and look. Main idea reminds me all the modern react'ich style of components and besides some details thy are pretty similar.
 
-###2. Why
+###Why
+
 We've used the Knockout as the forontend framework of choice because of its' "unobtrusive" nature. As well as for React it's just a JS library but it in comparison, it can be used without redesigning the whole application's view structure, building process and deployment. 
 
-###3. How
+###How
+
 It starts with the bindings. Lets say that we have a really basic list of the comments to show.
 
 Some html:
