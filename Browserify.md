@@ -1,29 +1,30 @@
-#Browserify
+# Browserify
 
-###Intro
+### Intro
 
 This is about the tool that helped us to organize our js knockout view models (and ultimately all js files) into require-able js modules bundled together as one file.
 
-###Why
+### Why
 
 Looking at the number of js files, number of code lines and desire to have reusability and dependencies managed easily (somewhat...)
 
-###How
+### How
 
 First, we need to specify the js module in separate js file. Lets say we would like to tweak our CommentsComponents.
 
 The simplest Comment view model:
-
-`var CommentViewModel = function (params) {
+```
+var CommentViewModel = function (params) {
     this.commentText = params.text;
     this.avatarPath = params.avatarPath;
 }
 
-module.exports = CommentViewModel;`
+module.exports = CommentViewModel;
+```
 
 And Comments view module:
-
-`var CommentViewModel = require("./CommentViewModel.js");
+```
+var CommentViewModel = require("./CommentViewModel.js");
 
 var CommentsViewModel = function(params) {
     var self = this;
@@ -42,18 +43,20 @@ var CommentsViewModel = function(params) {
     }
 }
 
-module.exports = CommentsViewModel;`
+module.exports = CommentsViewModel;
+```
 
 View models are one part of ko.components, another one are templates. Lets move our html templates into separate files but remove "Script" tag in it.
 So in this moment we ended up with list of Component pairs like: "CoomentsViewModel.js" and "CommentsTemplate.html"
 
 One last thing before we bundle everything up is knocokut component registration. We will try to implement custom component registration which will do everything automagically for us but now wee need to register them manually.
-
-`(function() {
+```
+(function() {
     ko.components.register('comment-input', { viewModel: require("./CommentInputViewModel.js"), template: require("./CommentInputTemplate.html") });
     ko.components.register('comment', { viewModel: require("./CommentViewModel.js"), template: require("./CommentTemplate.html") });
     ko.components.register('comments-list', { viewModel: require("./CommentsViewModel.js"), template: require("./CommentsTemplate.html") });
-})();`
+})();
+```
 
 Now, having such files will show us nothing more than lots of red lines thrown in browser's console. Lets create special Gulp task which will transform our nice to read/code modules to browser friendly js content.
 
@@ -61,7 +64,7 @@ First, things first, we need to get Gulp (nuget - `install package gulp`, npm - 
 Then get the other dependencies...
 `npm install --save-dev browserify stringify vinyl-source-stream`
 
-`gulp.task('bundle', function () {
+```gulp.task('bundle', function () {
     return browserify({
         entries: ['./Components/ComponentRegistration.js'],
         debug: true,
@@ -72,7 +75,8 @@ Then get the other dependencies...
      .bundle()
      .pipe(source('./Bundle.js'))
      .pipe(gulp.dest('./Content'));
-})`
+})
+```
 
 Ok, a few words of explanation here:
 "entries" - array of "entry point" files, files that have modules required but nothing requires them (they can by script src'ed from html view directly)
