@@ -73,7 +73,9 @@ We just have to provide some name for the "namespace" that will be used to acces
 
 So now the browserify will append all the `module.exports` from the `entries` that we've defined in gulp task. Unfortunately we are not exporting anything from our "entry point" yet (ComponentRegistration.js). Lets say that we want to use only one from our view models: 
 
+```
 module.exports.CommentViewModel = require("./CommentViewModel.js");
+```
 
 After that change, we should be able to use it from our "external" js e.g. like this:
 

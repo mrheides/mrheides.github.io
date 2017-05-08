@@ -2,11 +2,11 @@
 
 ### Intro
 
-In this chapter I'll try to show the concept of Knockout Components. The thing that brings reusable modules responsible for its' own state and look. Main idea reminds me all the modern react'ich style of components and besides some details thy are pretty similar.
+In this chapter I'll try to show the concept of Knockout Components. The thing that brings reusable modules responsible for their own state and look. Main idea reminds me all the modern react-ish style of components and besides some details thy are pretty similar.
 
 ### Why
 
-We've used the Knockout as the forontend framework of choice because of its' "unobtrusive" nature. As well as for React it's just a JS library but it in comparison, it can be used without redesigning the whole application's view structure, building process and deployment. 
+We've used the Knockout as the forontend framework of choice because of its' "unobtrusive" nature. Just like React it's just a JS library but it in comparison, it can be used without redesigning the whole application's view structure, building process and deployment. 
 
 ### How
 
@@ -37,7 +37,7 @@ Some html:
 </script>
 ```
 
-As you can see, comments has list of similar objects which are of the same "type". Lets create the "class" for them (ES5).
+As you can see, `comments` has list of similar objects, which are of the same "type". Lets create the "class" for them (ES5).
 
 ```
 var CommentViewModel = function(text, avatarPath) {
@@ -74,7 +74,7 @@ ko.applyBindings(comments);
 
 Now lets say that we need to display that list in many different places within the system. This is what the templates should address nicely.
 
-So let's move the comments and comments list into templates
+So lets move the comments and comments list into templates
 
 ```
 <script type="text/html" id="comment-template">
@@ -85,13 +85,13 @@ So let's move the comments and comments list into templates
 </script>
 
 <script type="text/html" id="comments-template">
-    <div class="comments" data-bind="template: {name: 'comment-template', foreach: comments} "></div>
+    <div class="comments" data-bind="template: {name: 'comment-template', foreach: comments}"></div>
 </script>
 ```
 
 Which can be use now as:
 ```
-<div data-bind="template: {name: 'comments-template'} "></div>
+<div data-bind="template: {name: 'comments-template'}"></div>
 ```
 
 Having the pairs of View Models and Templates gives us the ability to pack them into Components. Well... of course we could go to the components right away with the inline html template and view model but that's look for me like a more real life process. 
